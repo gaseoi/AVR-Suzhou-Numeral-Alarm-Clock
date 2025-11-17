@@ -1,4 +1,8 @@
 # AVR-Suzhou-Numeral-Alarm-Clock
+
+![0](https://github.com/user-attachments/assets/93f3390c-785a-44ca-baa7-6479c7da6660)
+
+
 ## Intro
 This is a personal project applying bare-metal C concepts from the "Make AVR Programming" book by Elliot Williams to create an IMU integrated alarm clock displaying Suzhou numerals on OLED. All drivers written by me in C by reading datasheets and doing bitwise manipulations to write to individual registers. 
 
@@ -10,14 +14,16 @@ Could I have made this overnight using the comfort of existing arduino libraries
 
 ## Key features:
 
-+ Project consists of an ATMEGA168p communicating via I2C to an MPU6050 6 axis IMU, DS1307 RTC, and SSD1306 OLED.
++ Project consists of an ATMEGA168p communicating via I2C to an MPU6050 6-axis IMU, DS1307 RTC, and SSD1306 OLED.
 + PWM is used to control a small haptic motor through the base of a transistor. 
 + The IMU is used for tilt detection so that clock mode is selected by changing its orientation.
   + There are three modes: Screen-off, screen-on (alarm on), and screen on (alarm off).
 + The on-board ADC is used for monitering battery power level with a voltage divider.
-+ The screen not only displays the time using Suzhou numerals, but also displays the current clock mode, and battery percentage graphically.
++ The OLED screen not only displays the time using Suzhou numerals, but also displays the current clock mode, and battery percentage graphically.
++ A condensed 16x8 bitmap is stored in flash memory for each number and decondensed using a automated algorithm when needed.
+  + Reduces flash memory usage and saved me the headache of creating and storing huge individual bitmaps. 
 + The ATMEGA168p is running at 8MHz, configured to enter power-down every ~8.0s between each wakeup via the watchdog timer enabled as an interrupt.
-  + This is done to minimize power consumption as the clock really doesnt need constant updates every second/millisecond. 
+  + This is done to minimize power consumption as the clock really doesnt need constant updates every second/millisecond.
 
 ## Setup Guide:
 Pin mapping summarized below:
